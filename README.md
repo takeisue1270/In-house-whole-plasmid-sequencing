@@ -3,7 +3,7 @@
 An end-to-end, research-use workflow linking the current Oxford Nanopore Technologies (ONT) plasmid protocol to per-barcode de novo assembly with Flye.
 
 > [!IMPORTANT]
-> ONT documentation is the controlling source except for two explicitly marked in-house deviations: a miniaturized barcoding reaction using 2.0 µL plasmid DNA plus 0.2 µL Rapid Barcode per sample, and omission of the pooled-library AMPure XP cleanup. Check the live ONT protocol before every run and use the complete manufacturer workflow when strict ONT compliance, validated input limits, or maximum library recovery is required.
+> ONT documentation is the controlling source except for explicitly marked in-house deviations: miniaturized barcoding, omission of the pooled-library AMPure XP cleanup, the 0.3 µL RA + 2.7 µL ADB adapter attachment, and the experimental PromethION final-library composition. Check the live ONT protocol before every run and use the complete manufacturer workflow when strict ONT compliance, validated input limits, or maximum library recovery is required.
 
 ## Scope
 
@@ -16,7 +16,7 @@ The repository covers:
 3. demultiplexed FASTQ input preparation; and
 4. independent Flye assembly for each barcode.
 
-The supported wet-lab device branch in this release is **MinION/GridION with FLO-MIN114**. PromethION is intentionally excluded until a current ONT kit-specific plasmid protocol explicitly defines SQK-RBK114 compatibility and the final loading composition for FLO-PRO114M.
+This release contains the controlled **MinION/GridION FLO-MIN114** loading branch and a clearly labeled **experimental in-house PromethION FLO-PRO114M** branch. The current ONT plasmid protocol does not define an SQK-RBK114 PromethION final-library composition; the PromethION values in this repository require local validation and must not be described as an ONT kit-specific plasmid protocol.
 
 The English wet-lab document is available as [PROTOCOL.md](PROTOCOL.md) and [Whole_Plasmid_Sequencing_Protocol.docx](Whole_Plasmid_Sequencing_Protocol.docx). Publication checks and unresolved deviations from current ONT guidance are listed in [REVIEW_NOTES.md](REVIEW_NOTES.md).
 
@@ -34,7 +34,7 @@ For routine plasmid verification, this workflow can complement or replace a seri
 
 This approach is particularly useful when several constructs require full-length verification, when repeats or unexpected backbone changes matter, or when an experimental decision is needed quickly. Sanger sequencing remains a simple and effective choice for targeted confirmation of a short, known region in one or a few samples.
 
-To reduce preparation time and reagent use, each in-house barcoding reaction contains **2.0 µL purified plasmid DNA and 0.2 µL Rapid Barcode**. The complete 2.2 µL reactions are pooled, and the rapid branch proceeds from a well-mixed aliquot directly to adapter attachment, omitting the post-barcoding AMPure XP bead incubation, magnetic separation, ethanol washes, and elution. These shortcuts are laboratory-specific deviations rather than ONT-endorsed equivalents; use calibrated low-volume pipetting, record DNA concentration and input mass, and apply locally defined acceptance criteria before routine adoption.
+To reduce preparation time and reagent use, each in-house barcoding reaction contains **2.0 µL purified plasmid DNA and 0.2 µL Rapid Barcode**. The complete 2.2 µL reactions are pooled, and 33 µL of the well-mixed direct pool is combined with **0.3 µL RA and 2.7 µL ADB** to produce 36 µL prepared library without post-barcoding AMPure XP cleanup. For the experimental PromethION branch, the full 36 µL library is combined with **100 µL SB and 64 µL LIB** to make a 200 µL loading mix. These settings are laboratory-specific deviations rather than ONT-endorsed equivalents; use calibrated low-volume pipetting, record DNA concentration and input mass, and apply locally defined acceptance criteria before routine adoption.
 
 The table is a use-case comparison, not a guaranteed performance or cost benchmark. Actual turnaround, yield, accuracy, and cost per sample depend on batch size, DNA quality, flow-cell condition, run settings, basecalling, analysis resources, and the acceptance criteria used by each laboratory.
 
@@ -124,7 +124,7 @@ THREADS=24 GENOME_SIZE=12k SAMPLE_SIZE=2000 bash ./flye.sh 1 24
 
 ## Protocol provenance
 
-The wet-lab section began as an English edition of an internal protocol dated 2025-02-11. The miniaturized **2.0 µL DNA + 0.2 µL barcode** reaction and post-barcoding AMPure XP cleanup bypass are intentionally retained as clearly labeled in-house rapid deviations; all other listed reagent quantities remain tied to the controlled ONT sources. Because the controlled ONT plasmid protocol explicitly documents the MinION/GridION branch but not a complete SQK-RBK114 PromethION branch, PromethION instructions were removed. Plasmid extraction content remains excluded.
+The wet-lab section began as an English edition of an internal protocol dated 2025-02-11. The miniaturized barcoding reaction, AMPure XP cleanup bypass, 0.3 µL RA + 2.7 µL ADB attachment, and 100 µL SB + 64 µL LIB + 36 µL library PromethION loading mix are intentionally retained as labeled in-house deviations. The generic ONT PromethION guide supports a 200 µL Kit 14 loading volume but delegates the component composition to the relevant kit-specific protocol; therefore, the values here are not presented as ONT-validated SQK-RBK114 plasmid settings. Plasmid extraction content remains excluded.
 
 Before bench use, compare this repository with the current [ONT plasmid sequencing protocol for SQK-RBK114](https://nanoporetech.com/resources/technique/assembly/document/rapid-sequencing-v14-plasmid-sequencing-sqk-rbk114-96) and the applicable device and flow-cell documentation.
 
