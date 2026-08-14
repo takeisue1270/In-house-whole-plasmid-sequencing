@@ -1,18 +1,18 @@
 # Whole Plasmid Sequencing
 
-**ONT-referenced, in-house miniaturized rapid workflow | English edition | For research use only**
+**ONT-referenced, in-house miniaturized rapid workflow | MinION/GridION and experimental PromethION branches | For research use only**
 
-**Starting material:** purified plasmid DNA  
-**Library kit:** Rapid Barcoding Kit 24 or 96 V14 (SQK-RBK114.24 or SQK-RBK114.96)  
-**Primary source:** ONT protocol PRB_9188_v114_revK_07Apr2026  
+**Starting material:** purified plasmid DNA
+**Library kit:** Rapid Barcoding Kit 24 or 96 V14 (SQK-RBK114.24 or SQK-RBK114.96)
+**Primary source:** ONT protocol PRB_9188_v114_revK_07Apr2026
 **English repository edition:** 2026-08-14
 
 > [!IMPORTANT]
-> Oxford Nanopore Technologies (ONT) documentation is the controlling source except for two explicitly marked in-house deviations: **the miniaturized 2.0 µL DNA + 0.2 µL barcode reaction in Section 4.2 and the pooled-library AMPure XP cleanup bypass in Section 4.3**. Check the linked ONT pages immediately before use and follow the complete manufacturer workflow whenever strict ONT compliance, validated input limits, or maximum library recovery is required.
+> Oxford Nanopore Technologies (ONT) documentation is the controlling source except for four explicitly marked in-house deviations: **the miniaturized 2.0 µL DNA + 0.2 µL barcode reaction, the AMPure XP cleanup bypass, the 0.3 µL RA + 2.7 µL ADB adapter attachment, and the experimental PromethION final-library composition**. The current ONT plasmid protocol provides only a MinION/GridION branch. Check the linked ONT pages immediately before use and follow the complete manufacturer workflow whenever strict ONT compliance, validated input limits, or maximum library recovery is required.
 
 ## 1. Scope and exclusions
 
-This workflow begins with purified plasmid DNA and covers library preparation, sequencing, demultiplexed FASTQ handling, and per-barcode Flye assembly. It deliberately excludes plasmid extraction procedures, extraction-kit instructions, and extraction-kit recommendations.
+This workflow begins with purified plasmid DNA and covers library preparation, sequencing, demultiplexed FASTQ handling, and per-barcode Flye assembly. It deliberately excludes plasmid extraction procedures, extraction-kit instructions, and extraction-kit recommendations. The MinION/GridION loading branch is tied to the controlled ONT plasmid protocol; the PromethION branch is an experimental in-house adaptation and is not an ONT kit-specific plasmid protocol.
 
 The complete wet-lab method should be performed only by trained personnel familiar with the current ONT protocol for the exact kit, device, and flow cell. The concise checklist below connects an in-house rapid library-preparation variant to the repository's Flye analysis; it is not intended to duplicate the full manufacturer protocol.
 
@@ -21,9 +21,10 @@ The complete wet-lab method should be performed only by trained personnel famili
 Check these pages before every run:
 
 1. [ONT plasmid sequencing from DNA using SQK-RBK114](https://nanoporetech.com/document/rapid-sequencing-v14-plasmid-sequencing-sqk-rbk114-96) - plasmid input, barcoding, the manufacturer-required cleanup, adapter attachment, and the MinION/GridION branch.
-2. [ONT Flow Cell Wash Kit EXP-WSH004/EXP-WSH004-XL](https://nanoporetech.com/document/flow-cell-wash-kit-exp-wsh004) - current MinION/GridION wash and post-wash options.
+2. [ONT loading multiple PromethION Flow Cells](https://nanoporetech.com/document/running-multiple-promethion-flow-cells) - generic PromethION priming, 200 µL Kit 14 loading volume, port handling, and loading sequence; it does not define the SQK-RBK114 plasmid final-library composition.
+3. [ONT Flow Cell Wash Kit EXP-WSH004/EXP-WSH004-XL](https://nanoporetech.com/document/flow-cell-wash-kit-exp-wsh004) - current flow-cell wash and post-wash options.
 
-If these documents conflict with any value below, use the current ONT document and update this repository before the next release. The intentional exceptions in this edition are the miniaturized barcoding reaction in Section 4.2 and cleanup bypass in Section 4.3.
+If these documents conflict with any value below, use the current ONT document and update this repository before the next release. The intentional in-house exceptions are identified at their point of use in Sections 4.2-4.4 and 5.2.
 
 ## 3. Starting material and preparation
 
@@ -48,11 +49,11 @@ Prepare one in-house miniaturized reaction per sample:
 > [!IMPORTANT]
 > The current ONT plasmid protocol uses approximately 50 ng plasmid DNA in 9 µL plus 1 µL Rapid Barcode. The five-fold miniaturized volumes below are a laboratory-specific deviation and are not an ONT-validated substitute. Accurate 0.2 µL dispensing requires a calibrated low-volume pipetting method. Validate acceptable DNA concentration, input mass, barcode balance, and sequencing performance locally.
 
-| Component | Volume per sample |
-| --- | ---: |
-| Purified plasmid DNA | 2.0 µL |
-| One unique Rapid Barcode (RB01-RB96) | 0.2 µL |
-| **Total** | **2.2 µL** |
+| Component                            | Volume per sample |
+| ------------------------------------ | ----------------: |
+| Purified plasmid DNA                 |           2.0 µL |
+| One unique Rapid Barcode (RB01-RB96) |           0.2 µL |
+| **Total**                      | **2.2 µL** |
 
 1. Mix thoroughly by pipetting and briefly spin down.
 2. Incubate at 30°C for 2 minutes and then at 80°C for 2 minutes.
@@ -65,24 +66,28 @@ Prepare one in-house miniaturized reaction per sample:
 > This is a deliberate deviation from the current ONT plasmid protocol, which specifies equal-volume AMPure XP bead cleanup, two ethanol washes, elution, and quantification after pooling. The bypass has not been established by ONT as an equivalent replacement. Validate it locally with appropriate controls and revert to the complete current ONT cleanup if sequencing yield, barcode balance, assembly quality, or reproducibility is inadequate.
 
 1. After pooling the complete miniaturized barcoding reactions, mix the pool thoroughly by gentle pipetting and briefly spin down. Equal input mass and complete transfer of each 2.2 µL reaction are important for representation in the direct-pool aliquot.
-2. Transfer **11 µL** of the well-mixed pooled barcoded library to a clean 1.5 mL DNA LoBind tube. If the total pooled volume is less than 11 µL, make up to 11 µL with EB.
+2. Transfer **33 µL** of the well-mixed pooled barcoded library to a clean 1.5 mL DNA LoBind tube. If the total pooled volume is less than 33 µL, make up to 33 µL with EB. This dilution may be substantial for small batches and must be covered by local validation.
 3. Do **not** add AXP, perform magnetic separation or ethanol washes, or carry out the bead-elution step.
 4. Proceed immediately to rapid-adapter attachment.
 
 ### 4.4 Rapid-adapter attachment
 
-1. Use the **11 µL direct pooled library** prepared in Section 4.3. Do not exceed the current ONT maximum library input; if the starting DNA amount differs from Section 3, quantify the pool and follow the current ONT mass limit.
-2. Prepare diluted Rapid Adapter:
+> [!IMPORTANT]
+> The current ONT plasmid protocol prepares 5 µL diluted adapter from 1.5 µL RA and 3.5 µL ADB, then adds 1 µL to 11 µL cleaned library. The following 0.3 µL RA + 2.7 µL ADB composition added to 33 µL direct pool is an in-house deviation and is not an ONT-validated equivalent.
 
-| Component | Volume |
-| --- | ---: |
-| Rapid Adapter (RA) | 1.5 µL |
-| Adapter Buffer (ADB) | 3.5 µL |
-| **Total** | **5 µL** |
+1. Use the **33 µL direct pooled library** prepared in Section 4.3. If the starting DNA amount differs from Section 3, quantify the pool and ensure that the intended library input is within a locally validated range.
+2. In a clean DNA LoBind tube, prepare the following adapter-attachment mixture:
 
-3. Add **1 µL** of diluted RA to the 11 µL direct pooled library.
-4. Mix gently, briefly spin down, and incubate for **5 minutes at room temperature**.
-5. Keep the prepared library on ice until loading and sequence it promptly.
+| Component                      |           Volume |
+| ------------------------------ | ---------------: |
+| Direct pooled barcoded library |           33 µL |
+| Rapid Adapter (RA)             |          0.3 µL |
+| Adapter Buffer (ADB)           |          2.7 µL |
+| **Prepared DNA library** | **36 µL** |
+
+3. Add the 33 µL direct pooled library to the RA/ADB reagents, mix gently, and briefly spin down.
+4. Incubate for **5 minutes at room temperature**.
+5. Keep the 36 µL prepared library on ice until loading and sequence it promptly.
 
 ## 5. Flow-cell priming and loading
 
@@ -90,33 +95,56 @@ Prepare one in-house miniaturized reaction per sample:
 
 The controlled ONT plasmid protocol specifies the following priming mix:
 
-| Component | Volume per flow cell |
-| --- | ---: |
-| Flow Cell Flush (FCF) | 1,170 µL |
-| BSA, 50 mg/mL | 5 µL |
-| Flow Cell Tether (FCT) | 30 µL |
-| **Total** | **1,205 µL** |
+| Component              | Volume per flow cell |
+| ---------------------- | -------------------: |
+| Flow Cell Flush (FCF)  |            1,170 µL |
+| BSA, 50 mg/mL          |                5 µL |
+| Flow Cell Tether (FCT) |               30 µL |
+| **Total**        |  **1,205 µL** |
 
 1. Bring the flow cell to room temperature for 20 minutes and follow the current insertion and flow-cell-check instructions.
 2. Open the priming port and draw back only 20-30 µL as directed, keeping the array covered with buffer and avoiding air bubbles.
 3. Load **800 µL** priming mix and wait 5 minutes.
 4. Immediately before loading, prepare:
 
-| Component | Volume per flow cell |
-| --- | ---: |
-| Sequencing Buffer (SB) | 37.5 µL |
-| Thoroughly resuspended Library Beads (LIB), or LIS where applicable | 25.5 µL |
-| Prepared DNA library | 12 µL |
-| **Total** | **75 µL** |
+| Component                                                           | Volume per flow cell |
+| ------------------------------------------------------------------- | -------------------: |
+| Sequencing Buffer (SB)                                              |             37.5 µL |
+| Thoroughly resuspended Library Beads (LIB), or LIS where applicable |             25.5 µL |
+| Prepared DNA library, aliquoted from the 36 µL preparation         |               12 µL |
+| **Total**                                                     |     **75 µL** |
 
 5. Complete priming with **200 µL** additional priming mix through the priming port.
 6. Gently mix the 75 µL library and load it through the SpotON sample port dropwise, following the current ONT illustrations and port-closing sequence.
 
-### 5.2 PromethION status
+### 5.2 Experimental in-house PromethION branch (FLO-PRO114M)
 
-**PromethION is not supported by this repository release.** The controlled ONT plasmid protocol lists FLO-MIN114 and provides MinION/GridION loading instructions. ONT's generic PromethION loading guide requires the final library composition to come from the relevant kit-specific protocol and does not, by itself, establish an SQK-RBK114 plasmid workflow for FLO-PRO114M.
+> [!IMPORTANT]
+> The ONT generic PromethION guide states that a Kit 14 final library has a total loading volume of 200 µL but directs users to the relevant kit-specific protocol for the component volumes. The current ONT SQK-RBK114 plasmid protocol does not supply a PromethION branch. The 100 µL SB + 64 µL LIB + 36 µL library composition below is an experimental in-house setting, not a manufacturer-validated SQK-RBK114 plasmid loading recipe.
 
-Do not scale or adapt the MinION/GridION volumes in this document for PromethION. Add a PromethION branch only after a current ONT kit-specific plasmid protocol explicitly confirms compatibility and all final library, priming, loading, run, wash, and storage settings.
+The generic ONT PromethION guide specifies this priming mix per flow cell:
+
+| Component              | Volume per flow cell |
+| ---------------------- | -------------------: |
+| Flow Cell Flush (FCF)  |            1,170 µL |
+| Flow Cell Tether (FCT) |               30 µL |
+| **Total**        |  **1,200 µL** |
+
+1. Bring the PromethION flow cell to room temperature for 20 minutes, insert it correctly, and perform the applicable flow-cell check.
+2. Open the inlet port and draw back only 20-30 µL, keeping the sensor array covered and avoiding air bubbles.
+3. Load **500 µL** priming mix through the inlet port and wait at least 5 minutes.
+4. Load a second **500 µL** priming mix through the inlet port.
+5. Immediately before loading, prepare the in-house final library:
+
+| Component                                  | Volume per flow cell |
+| ------------------------------------------ | -------------------: |
+| Sequencing Buffer (SB)                     |              100 µL |
+| Thoroughly resuspended Library Beads (LIB) |               64 µL |
+| Prepared DNA library from Section 4.4      |               36 µL |
+| **Total**                            |    **200 µL** |
+
+6. Gently mix and load the full **200 µL** through the inlet port, avoiding air bubbles.
+7. Close the inlet port, install or retain the light shield, and wait at least 10 minutes after loading before starting the experiment, following the current PromethION guide.
 
 ## 6. Data acquisition and basecalling
 
@@ -131,17 +159,19 @@ For the controlled plasmid protocol revision:
 
 MinKNOW interfaces and model names change over time. Follow the current ONT screen sequence if it differs.
 
+The 12-hour run setting is taken from the controlled MinION/GridION plasmid protocol. Establish and document a locally validated acquisition endpoint for the experimental PromethION branch.
+
 ## 7. Flow-cell washing and storage
 
-Use the current Flow Cell Wash Kit document for the MinION/GridION branch. In the controlled revision, the wash mix per flow cell is:
+Use the current Flow Cell Wash Kit document for MinION/GridION and the current PromethION loading/washing guide with EXP-WSH004-XL for PromethION. In the controlled wash revision, the wash mix per flow cell is:
 
-| Component | Volume per flow cell |
-| --- | ---: |
-| Wash Mix (WMX) | 2 µL |
-| Wash Diluent (DIL) | 398 µL |
-| **Total** | **400 µL** |
+| Component          | Volume per flow cell |
+| ------------------ | -------------------: |
+| Wash Mix (WMX)     |                2 µL |
+| Wash Diluent (DIL) |              398 µL |
+| **Total**    |    **400 µL** |
 
-Prepare the mix fresh, keep WMX on ice, do not vortex WMX or the completed wash mix, and stop or pause acquisition before manipulating the flow cell. The controlled procedure delivers the wash as **two 200 µL additions separated by 5 minutes**, followed by a **1-hour incubation** with the relevant port closed. Follow the current device-specific waste-removal, post-wash reload, or storage sequence. Do not store a flow cell with wash mix on the array.
+Prepare the mix fresh, keep WMX on ice, do not vortex WMX or the completed wash mix, and stop or pause acquisition before manipulating the flow cell. The controlled MinION/GridION procedure delivers the wash as **two 200 µL additions separated by 5 minutes**, followed by a **1-hour incubation** with the relevant port closed. For PromethION, follow the current PromethION-specific delivery, waste-removal, reload, and storage sequence rather than transferring the MinION/GridION port sequence. Do not store a flow cell with wash mix on the array.
 
 ## 8. Flye analysis
 
@@ -166,7 +196,7 @@ The script filters reads by minimum length, uses a fixed random seed for repeata
 ## 10. References
 
 - Oxford Nanopore Technologies. [Plasmid sequencing from DNA using SQK-RBK114 (.24 or .96)](https://nanoporetech.com/document/rapid-sequencing-v14-plasmid-sequencing-sqk-rbk114-96). Controlled revision at preparation: PRB_9188_v114_revK_07Apr2026.
-- Oxford Nanopore Technologies. [Loading multiple PromethION Flow Cells](https://nanoporetech.com/document/running-multiple-promethion-flow-cells). Consulted only to assess the compatibility limitation: PFC_9097_v1_revN_29Jan2025.
+- Oxford Nanopore Technologies. [Loading multiple PromethION Flow Cells](https://nanoporetech.com/document/running-multiple-promethion-flow-cells). Used for generic PromethION priming, port handling, and the Kit 14 total loading volume; the final component composition remains an in-house deviation: PFC_9097_v1_revN_29Jan2025.
 - Oxford Nanopore Technologies. [Flow Cell Wash Kit EXP-WSH004/EXP-WSH004-XL](https://nanoporetech.com/document/flow-cell-wash-kit-exp-wsh004). Controlled revision at preparation: WFC_9120_v1_revS_25Jul2025.
 - Kolmogorov M, Yuan J, Lin Y, Pevzner PA. Assembly of long, error-prone reads using repeat graphs. *Nature Biotechnology*. 2019;37:540-546.
 - Shen W, Le S, Li Y, Hu F. SeqKit: a cross-platform and ultrafast toolkit for FASTA/Q file manipulation. *PLOS ONE*. 2016;11:e0163962.
