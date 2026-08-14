@@ -3,7 +3,7 @@
 An end-to-end, research-use workflow linking the current Oxford Nanopore Technologies (ONT) plasmid protocol to per-barcode de novo assembly with Flye.
 
 > [!IMPORTANT]
-> ONT documentation is the controlling source for reagent quantities, incubation conditions, device settings, and flow-cell operations. Check the live ONT protocol before every run and follow a newer revision if available.
+> ONT documentation is the controlling source except for two explicitly marked in-house deviations: a miniaturized barcoding reaction using 2.0 µL plasmid DNA plus 0.2 µL Rapid Barcode per sample, and omission of the pooled-library AMPure XP cleanup. Check the live ONT protocol before every run and use the complete manufacturer workflow when strict ONT compliance, validated input limits, or maximum library recovery is required.
 
 ## Scope
 
@@ -11,7 +11,7 @@ The workflow begins with **purified plasmid DNA**. DNA extraction procedures, ki
 
 The repository covers:
 
-1. ONT-aligned rapid barcoding, cleanup, and adapter attachment;
+1. in-house miniaturized barcoding and direct adapter attachment using a cleanup bypass;
 2. flow-cell priming, loading, run setup, and optional wash/storage notes;
 3. demultiplexed FASTQ input preparation; and
 4. independent Flye assembly for each barcode.
@@ -33,6 +33,8 @@ For routine plasmid verification, this workflow can complement or replace a seri
 | Turnaround                 | Often depends on an external service schedule         | Can support same-day in-house review when local sequencing and analysis capacity are available       |
 
 This approach is particularly useful when several constructs require full-length verification, when repeats or unexpected backbone changes matter, or when an experimental decision is needed quickly. Sanger sequencing remains a simple and effective choice for targeted confirmation of a short, known region in one or a few samples.
+
+To reduce preparation time and reagent use, each in-house barcoding reaction contains **2.0 µL purified plasmid DNA and 0.2 µL Rapid Barcode**. The complete 2.2 µL reactions are pooled, and the rapid branch proceeds from a well-mixed aliquot directly to adapter attachment, omitting the post-barcoding AMPure XP bead incubation, magnetic separation, ethanol washes, and elution. These shortcuts are laboratory-specific deviations rather than ONT-endorsed equivalents; use calibrated low-volume pipetting, record DNA concentration and input mass, and apply locally defined acceptance criteria before routine adoption.
 
 The table is a use-case comparison, not a guaranteed performance or cost benchmark. Actual turnaround, yield, accuracy, and cost per sample depend on batch size, DNA quality, flow-cell condition, run settings, basecalling, analysis resources, and the acceptance criteria used by each laboratory.
 
@@ -122,7 +124,7 @@ THREADS=24 GENOME_SIZE=12k SAMPLE_SIZE=2000 bash ./flye.sh 1 24
 
 ## Protocol provenance
 
-The wet-lab section began as an English edition of an internal protocol dated 2025-02-11. During technical review, laboratory-specific reduced volumes were replaced with values from the current ONT plasmid protocol, and the omitted pooled-library cleanup was restored. Because the controlled ONT plasmid protocol explicitly documents the MinION/GridION branch but not a complete SQK-RBK114 PromethION branch, PromethION instructions were removed. Plasmid extraction content remains excluded.
+The wet-lab section began as an English edition of an internal protocol dated 2025-02-11. The miniaturized **2.0 µL DNA + 0.2 µL barcode** reaction and post-barcoding AMPure XP cleanup bypass are intentionally retained as clearly labeled in-house rapid deviations; all other listed reagent quantities remain tied to the controlled ONT sources. Because the controlled ONT plasmid protocol explicitly documents the MinION/GridION branch but not a complete SQK-RBK114 PromethION branch, PromethION instructions were removed. Plasmid extraction content remains excluded.
 
 Before bench use, compare this repository with the current [ONT plasmid sequencing protocol for SQK-RBK114](https://nanoporetech.com/resources/technique/assembly/document/rapid-sequencing-v14-plasmid-sequencing-sqk-rbk114-96) and the applicable device and flow-cell documentation.
 
