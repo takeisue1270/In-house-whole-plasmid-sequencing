@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "If you use this workflow, please cite the repository and the Flye and SeqKit publications listed in the documentation."
+title: "Whole Plasmid Sequencing"
+type: software
+authors:
+  - name: "Dant"
+    website: "https://github.com/takeisue1270"
+version: 0.1.0
+date-released: 2026-08-14
+license: MIT
+keywords:
+  - plasmid sequencing
+  - Oxford Nanopore
+  - Flye
+  - SeqKit
+  - long-read sequencing
+abstract: "An in-house workflow for multiplexed whole-plasmid sequencing and per-barcode de novo assembly."
