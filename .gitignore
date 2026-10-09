@@ -1,0 +1,23 @@
+# Raw and intermediate sequencing data must never be committed.
+*.fastq
+*.fastq.gz
+*.fq
+*.fq.gz
+*.pod5
+*.fast5
+*.bam
+*.bam.bai
+*.sam
+fastq_pass/
+fastq_fail/
+pod5*/
+
+# Run outputs
+flye_results/
+*.fasta
+*.previous.*
+
+# Editor and OS cruft
+.DS_Store
+Thumbs.db
+~$*
