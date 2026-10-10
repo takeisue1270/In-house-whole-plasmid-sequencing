@@ -2,8 +2,6 @@
 
 An end-to-end, research-use workflow linking the current Oxford Nanopore Technologies (ONT) plasmid protocol to per-barcode de novo assembly with Flye.
 
-*[日本語版 README はこちら](README.ja.md)*
-
 > [!IMPORTANT]
 > ONT documentation is the controlling source except for explicitly marked in-house deviations: miniaturized barcoding, omission of the pooled-library AMPure XP cleanup, the 0.3 µL RA + 2.7 µL ADB adapter attachment, and the experimental PromethION final-library composition. Check the live ONT protocol before every run and use the complete manufacturer workflow when strict ONT compliance, validated input limits, or maximum library recovery is required.
 
@@ -20,7 +18,7 @@ The repository covers:
 
 This release contains the controlled **MinION/GridION FLO-MIN114** loading branch and a clearly labeled **experimental in-house PromethION FLO-PRO114M** branch. The current ONT plasmid protocol does not define an SQK-RBK114 PromethION final-library composition; the PromethION values in this repository require local validation and must not be described as an ONT kit-specific plasmid protocol.
 
-The English wet-lab document is available as [PROTOCOL.md](PROTOCOL.md) and [Whole_Plasmid_Sequencing_Protocol.docx](Whole_Plasmid_Sequencing_Protocol.docx). Every deviation from current ONT guidance, and what each one obliges you to validate locally, is listed in [DEVIATIONS.md](DEVIATIONS.md). A Japanese summary is in [README.ja.md](README.ja.md).
+The English wet-lab document is available as [PROTOCOL.md](PROTOCOL.md) and [Whole_Plasmid_Sequencing_Protocol.docx](Whole_Plasmid_Sequencing_Protocol.docx). Every deviation from current ONT guidance, and what each one obliges you to validate locally, is listed in [DEVIATIONS.md](DEVIATIONS.md).
 
 ## A rapid alternative to serial Sanger sequencing
 
