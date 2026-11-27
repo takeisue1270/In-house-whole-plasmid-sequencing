@@ -115,6 +115,7 @@ THREADS=24 GENOME_SIZE=12k SAMPLE_SIZE=2000 bash ./flye.sh 1 24
 
 - Choose `GENOME_SIZE`, `SAMPLE_SIZE`, and `MIN_OVERLAP` for the expected plasmid and read distribution; the defaults are not universal.
 - A Flye assembly is not, by itself, proof of sequence identity, structural correctness, or circularity. Inspect the Flye work directory, assembly graph, read support, expected length, and known reference features where applicable.
+- Flye can close a small circular plasmid as a contig that holds the plasmid twice, end to end. Aligned to the reference as it is, such a contig looks like one clean copy plus a plasmid-sized insertion even when the plasmid is correct. [Flye_Concatemer_Trimmer](https://github.com/takeisue1270/Flye_Concatemer_Trimmer) is a separate tool that cuts these contigs to one copy and aligns them to the reference; it reads the `assembly.barcodeNN.fasta` files written here, and this workflow does not depend on it.
 - Barcode cross-talk, chimeric reads, low input quality, and uneven read counts can affect results.
 - The fixed seed makes sampling repeatable only when the input record order and SeqKit version are also unchanged.
 - The script returns a non-zero status if any requested barcode fails or is skipped, even when other barcodes succeed.
