@@ -6,9 +6,9 @@ authors:
   - family-names: "Takesue"
     given-names: "Hiroaki"
     orcid: "https://orcid.org/0000-0001-8585-5494"
-version: 1.0.0
+version: 1.0.1
 doi: 10.5281/zenodo.21930531
-date-released: 2026-08-14
+date-released: 2026-11-28
 license: MIT
 repository-code: "https://github.com/takeisue1270/In-house-whole-plasmid-sequencing"
 url: "https://github.com/takeisue1270/In-house-whole-plasmid-sequencing"
@@ -19,3 +19,11 @@ keywords:
   - SeqKit
   - long-read sequencing
 abstract: "An in-house workflow for multiplexed whole-plasmid sequencing and per-barcode de novo assembly."
+references:
+  - type: software
+    title: "Flye_Concatemer_Trimmer"
+    authors:
+      - family-names: "Takesue"
+        given-names: "Hiroaki"
+    doi: 10.5281/zenodo.24611535
+    url: "https://github.com/takeisue1270/Flye_Concatemer_Trimmer"
